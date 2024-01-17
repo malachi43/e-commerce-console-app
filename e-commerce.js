@@ -277,7 +277,7 @@ function checkout() {
     const month = `${now.getUTCMonth() + 1}`
     const year = `${now.getUTCFullYear()}`
     const hour = `${now.getUTCHours() + 1 % 12}`
-    const minutes = `${now.getUTCMinutes()}`
+    const minutes = `${now.getUTCMinutes() < 10 ? "0" + now.getUTCMinutes() : now.getUTCMinutes()}`
     const amPm = now.getHours() >= 12 ? "PM" : "AM"
 
     finalCart["Total"] = formatPrice(total)
