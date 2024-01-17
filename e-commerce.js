@@ -273,14 +273,16 @@ function checkout() {
     })
 
     const now = new Date()
-    const day = `${now.getDay() < 10 ? "0" + now.getDay() : now.getDate()}`
-    const month = `${now.getMonth() + 1}`
-    const year = `${now.getFullYear()}`
+    const day = `${now.getUTCDate() < 10 ? "0" + now.getUTCDate() : now.getUTCDate()}`
+    const month = `${now.getUTCMonth() + 1}`
+    const year = `${now.getUTCFullYear()}`
+    const hour = `${now.getUTCHours() + 1 % 12}`
+    const minutes = `${now.getUTCMinutes()}`
     const amPm = now.getHours() >= 12 ? "PM" : "AM"
 
     finalCart["Total"] = formatPrice(total)
     finalCart["Product"] = `${finalCart[str].length} item(s) purchased.`
-    finalCart["time"] = `${now.getHours() % 12}:${now.getMinutes()}  ${amPm}`
+    finalCart["time"] = `${hour}:${minutes}  ${amPm}`
     finalCart["date"] = `${day}/${month}/${year}`
 
 
