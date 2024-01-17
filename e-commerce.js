@@ -211,7 +211,7 @@ function listProductCategory(char) {
     const option = learnableEcommerceObj.subOption[char]
 
     //category heading.
-    console.log(`${option.toUpperCase()}( Enter the product id to add product to cart ):`)
+    console.log(`${option.toUpperCase()}( Enter the product id to add product to cart. Type "checkout" to checkout. ):`)
     learnableEcommerceObj[option].types.forEach((obj, index) => {
         console.log(`${index + 1}. ${obj.item} (PRICE: ${formatPrice(obj.price)}) - id: ${obj.id}`)
     })
