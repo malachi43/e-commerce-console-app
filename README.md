@@ -1,10 +1,9 @@
 # e-commerce-console-app
 
-# todos
-- show the list of products
-- show the details of products on each click (price, description)
-- show checkout page
-- show type to buy command.
+This LEARNABLE E-COMMERCE COMMAND LINE APP OFFERS THE FOLLOWING FEATURES:
 
-
-the above should be a list with sequential numbers, in which each number corresponds to the functionality you intend to carry out. 
+- See our list of category products.
+- See each list of product on a particular category.
+- Add product to cart.
+- See your cart summary.
+- logout.

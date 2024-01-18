@@ -3,8 +3,6 @@ const readline = require("node:readline")
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const pathArray = __filename.split(process.platform === `win32` ? "\\" : "/")
 const filename = pathArray[pathArray.length - 1]
-let des = `\nDESCRIPTION:\n`
-let price = '\nPRICE:\n'
 let exitCode
 
 const learnableEcommerceObj = {
@@ -12,9 +10,8 @@ const learnableEcommerceObj = {
     products: ["watches", "footwears", "bluetooth speakers", "home appliances"],
     services: `\nLEARNABLE E-COMMERCE SERVICES:\nEnter 1 - To see our products.\nEnter 5 - to exit the application.\n`,
     cart: [],
-    goodbye: `\nPlease do to visit our site again.see you soon!!!\n`,
+    goodbye: `\nWe can't wait to have you shop with us again.see you soon!!! :)\n`,
     subOption: {},
-    productDes: [`${des}It is ideal for all occassions and events.${price}`, `${des}Thanks to unique adaptable fitting. The breathable upper material and the lightweight foot bed makes sure that the shoe is offering a best quality ventilation experience to keep your feet dry and cool all day. We have engineered this safety shoes to be extremely comfortable without feeling a sense of fatigue or discomfort. Some say it feels like having a sock on your feet.${price}`],
     watches: {
         types: [{ item: 'Richard Mille', price: generatePrice(), id: 1133 }, { item: 'Patek Phillipe', price: generatePrice(), id: 1122 }, { item: 'Rolex', price: generatePrice(), id: 1144 }, { item: 'Schwarz Etienne', price: generatePrice(), id: 1155 }]
     },
@@ -73,8 +70,8 @@ rl.on('line', (line) => {
             return
         }
         case `${5}`: {
-            rl.close()
             exitCode = 5
+            rl.close()
             return
         }
         case `a`: {
@@ -198,7 +195,8 @@ rl.on('line', (line) => {
 })
 
 rl.on('close', () => {
-    if (exitCode === String(5)) {
+    if (exitCode === 5) {
+        eraseUserInput()
         rl.write(goodbye.toUpperCase())
     }
     process.exit()
@@ -264,6 +262,8 @@ function addToCart(id) {
 
 
 function checkout() {
+    let crypto = require('node:crypto')
+    let orderID = crypto.randomBytes(14).toString('hex').toUpperCase()
     let total = 0
     let str = "cartItems"
     let finalCart = { [str]: [] }
@@ -284,6 +284,7 @@ function checkout() {
     finalCart["Product"] = `${finalCart[str].length} item(s) purchased.`
     finalCart["time"] = `${hour}:${minutes}  ${amPm}`
     finalCart["date"] = `${day}/${month}/${year}`
+    finalCart["OrderID"] = orderID
 
 
     return finalCart
