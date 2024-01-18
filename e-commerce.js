@@ -1,4 +1,4 @@
-//to enable us read input form the command line.
+//Read input form the command line.
 const readline = require("node:readline")
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const pathArray = __filename.split(process.platform === `win32` ? "\\" : "/")
@@ -62,7 +62,6 @@ rl.on('line', (line) => {
 
             for (let i = 0; i < n; i++) {
                 learnableEcommerceObj.subOption[String.fromCharCode(++count)] = learnableEcommerceObj.products[i].toLowerCase()
-                rl.write(learnableEcommerceObj.subOption)
                 rl.write(`${String.fromCharCode(count)}. ${learnableEcommerceObj.products[i].toUpperCase()}\n`)
             }
 
@@ -76,7 +75,7 @@ rl.on('line', (line) => {
         }
         case `a`: {
             eraseUserInput()
-            //check if the subOption object is not empty.
+            //check if the" subOption object" is not empty.
             if (Object.keys(learnableEcommerceObj.subOption).length > 0) {
                 return listProductCategory(`a`)
             }
@@ -84,7 +83,7 @@ rl.on('line', (line) => {
         }
         case `b`: {
             eraseUserInput()
-            //check if the subOption object is not empty.
+            //check if the ""subOption object"" is not empty.
             if (Object.keys(learnableEcommerceObj.subOption).length > 0) {
                 return listProductCategory(`b`)
             }
@@ -92,7 +91,7 @@ rl.on('line', (line) => {
         }
         case `c`: {
             eraseUserInput()
-            //check if the subOption object is not empty.
+            //check if the "subOption object" is not empty.
             if (Object.keys(learnableEcommerceObj.subOption).length > 0) {
                 return listProductCategory(`c`)
             }
@@ -100,7 +99,7 @@ rl.on('line', (line) => {
         }
         case `d`: {
             eraseUserInput()
-            //check if the subOption object is not empty.
+            //check if the "subOption object" is not empty.
             if (Object.keys(learnableEcommerceObj.subOption).length > 0) {
                 return listProductCategory(`d`)
             }
@@ -208,7 +207,7 @@ function listProductCategory(char) {
 
     const option = learnableEcommerceObj.subOption[char]
 
-    //category heading.
+    //product category heading.
     console.log(`${option.toUpperCase()}( Enter the product id to add product to cart. Type "checkout" to checkout. ):`)
     learnableEcommerceObj[option].types.forEach((obj, index) => {
         console.log(`${index + 1}. ${obj.item} (PRICE: ${formatPrice(obj.price)}) - id: ${obj.id}`)
@@ -263,6 +262,7 @@ function addToCart(id) {
 
 function checkout() {
     let crypto = require('node:crypto')
+    //GenerateS a random hexdecimal character.
     let orderID = crypto.randomBytes(14).toString('hex').toUpperCase()
     let total = 0
     let str = "cartItems"
@@ -290,6 +290,7 @@ function checkout() {
     return finalCart
 }
 
+//Format price to dollar currency.
 function formatPrice(price) {
     let pr = price
     const nigerianCurrencyFormat = new Intl.NumberFormat('en-US', {
