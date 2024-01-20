@@ -52,6 +52,7 @@ rl.question(welcomeMessage, (answer) => {
 })
 
 rl.on('line', (line) => {
+    line = line.toLowerCase()
     switch (line) {
         case `${1}`: {
             eraseUserInput()
@@ -107,87 +108,92 @@ rl.on('line', (line) => {
         }
         case `1133`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(1133))
+            console.log(`YOUR CART:\n`, addToCart(1133))
             return
         }
         case `1122`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(1122))
+            console.log(`YOUR CART:\n`, addToCart(1122))
             return
         }
         case `1144`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(1144))
+            console.log(`YOUR CART:\n`, addToCart(1144))
             return
         }
         case `1155`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(1155))
+            console.log(`YOUR CART:\n`, addToCart(1155))
             return
         }
         case `2233`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(2233))
+            console.log(`YOUR CART:\n`, addToCart(2233))
             return
         }
         case `2244`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(2244))
+            console.log(`YOUR CART:\n`, addToCart(2244))
             return
         }
         case `2255`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(2255))
+            console.log(`YOUR CART:\n`, addToCart(2255))
             return
         }
         case `2266`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(2266))
+            console.log(`YOUR CART:\n`, addToCart(2266))
             return
         }
         case `3344`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(3344))
+            console.log(`YOUR CART:\n`, addToCart(3344))
             return
         }
         case `3355`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(3355))
+            console.log(`YOUR CART:\n`, addToCart(3355))
             return
         }
         case `3366`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(3366))
+            console.log(`YOUR CART:\n`, addToCart(3366))
             return
         }
         case `3377`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(3377))
+            console.log(`YOUR CART:\n`, addToCart(3377))
             return
         }
         case `4455`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(4455))
+            console.log(`YOUR CART:\n`, addToCart(4455))
             return
         }
         case `4466`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(4466))
+            console.log(`YOUR CART:\n`, addToCart(4466))
             return
         }
         case `4477`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(4477))
+            console.log(`YOUR CART:\n`, addToCart(4477))
             return
         }
         case `4488`: {
             eraseUserInput()
-            console.log(`YOUR CART: `, addToCart(4488))
+            console.log(`YOUR CART:\n`, addToCart(4488))
             return
         }
         case "checkout": {
             eraseUserInput()
-            console.log(`ORDER SUMMARY: `, checkout())
+            if (learnableEcommerceObj.cart.length > 0) {
+                console.log(`ORDER SUMMARY:\n`, checkout())
+
+            } else {
+                console.log(`Add atleast one item to cart.`)
+            }
             return
         }
     }
@@ -274,15 +280,16 @@ function checkout() {
 
     const now = new Date()
     const day = `${now.getUTCDate() < 10 ? "0" + now.getUTCDate() : now.getUTCDate()}`
-    const month = `${now.getUTCMonth() + 1}`
+    const month = `${(now.getUTCMonth() + 1) < 10 ? "0" + (now.getUTCMonth() + 1) : (now.getUTCMonth() + 1)}`.trim()
     const year = `${now.getUTCFullYear()}`
-    const hour = `${now.getUTCHours() + 1 % 12}`
+    const hour = `${(now.getUTCHours() + 1) % 12}`
+    let formattedHour = hour < 10 ? "0"+hour : hour
     const minutes = `${now.getUTCMinutes() < 10 ? "0" + now.getUTCMinutes() : now.getUTCMinutes()}`
-    const amPm = now.getHours() >= 12 ? "PM" : "AM"
+    const amPm = now.getHours() >= 0 && now.getHours() < 12 ? "AM" : "PM"
 
     finalCart["Total"] = formatPrice(total)
-    finalCart["Product"] = `${finalCart[str].length} item(s) purchased.`
-    finalCart["time"] = `${hour}:${minutes}  ${amPm}`
+    finalCart["NumOfProducts"] = `${finalCart[str].length} item(s) purchased.`
+    finalCart["time"] = `${formattedHour}:${minutes}  ${amPm}`
     finalCart["date"] = `${day}/${month}/${year}`
     finalCart["OrderID"] = orderID
 
